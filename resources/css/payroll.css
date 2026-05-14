@@ -1,0 +1,371 @@
+/* ============================================
+   NININ'S BREW PAYROLL — MAIN STYLESHEET
+   ============================================ */
+
+/* ── VARIABLES ─────────────────────────────── */
+:root {
+    --brew-dark:    #4B2E2E;
+    --brew-medium:  #6B3F3F;
+    --brew-light:   #f5ede8;
+    --brew-accent:  #c97c5d;
+    --text-main:    #2d2d2d;
+    --text-muted:   #6b7280;
+    --border-color: #e5e7eb;
+    --success-bg:   #d1fae5;
+    --success-text: #065f46;
+    --error-bg:     #fee2e2;
+    --error-text:   #991b1b;
+    --warning-bg:   #fef9c3;
+    --warning-text: #854d0e;
+}
+
+/* ── BODY ───────────────────────────────────── */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f3f4f6;
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+}
+
+/* ── NAVBAR ─────────────────────────────────── */
+.navbar {
+    background-color: var(--brew-dark);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-brand {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.navbar-user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.875rem;
+}
+
+.navbar-user span {
+    opacity: 0.85;
+}
+
+/* ── SIDEBAR ─────────────────────────────────── */
+/* ── SIDEBAR ─────────────────────────────────── */
+.sidebar {
+    width: 220px;
+    min-height: calc(100vh - 52px);
+    background-color: var(--brew-medium);
+    color: white;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    box-shadow: 2px 0 6px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+.sidebar-label {
+    display: block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #d1b8b8;
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    width: 100%;
+}
+
+.sidebar-link {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    box-sizing: border-box;
+}
+
+.sidebar-link:hover {
+    background-color: var(--brew-dark);
+    color: white;
+}
+
+.sidebar-link.active {
+    background-color: var(--brew-dark);
+    font-weight: 600;
+}
+
+.sidebar-divider {
+    display: block;
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin: 0.5rem 0;
+    width: 100%;
+}
+
+/* ── LAYOUT WRAPPER ──────────────────────────── */
+.app-wrapper {
+    display: flex;
+    align-items: flex-start;
+}
+
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    min-height: calc(100vh - 52px);
+    min-width: 0;
+}
+
+/* ── LAYOUT WRAPPER ──────────────────────────── */
+.app-wrapper {
+    display: flex;
+}
+
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    min-height: calc(100vh - 52px);
+}
+
+/* ── PAGE HEADER ─────────────────────────────── */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.page-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+/* ── CARDS ───────────────────────────────────── */
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* ── BUTTONS ─────────────────────────────────── */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--brew-dark);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--brew-medium);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #e5e7eb;
+    color: var(--text-main);
+}
+
+.btn-secondary:hover {
+    background-color: #d1d5db;
+}
+
+.btn-danger {
+    background-color: transparent;
+    color: #dc2626;
+    padding: 0;
+    font-size: 0.8rem;
+}
+
+.btn-danger:hover {
+    text-decoration: underline;
+}
+
+.btn-edit {
+    background-color: transparent;
+    color: #2563eb;
+    padding: 0;
+    font-size: 0.8rem;
+}
+
+.btn-edit:hover {
+    text-decoration: underline;
+}
+
+/* ── TABLES ──────────────────────────────────── */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+table.data-table thead {
+    background-color: #f9fafb;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+table.data-table th,
+table.data-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+table.data-table tbody tr:hover {
+    background-color: #fafafa;
+}
+
+table.data-table .actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+/* ── BADGES ──────────────────────────────────── */
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 500;
+}
+
+.badge-active {
+    background-color: var(--success-bg);
+    color: var(--success-text);
+}
+
+.badge-inactive {
+    background-color: #f3f4f6;
+    color: var(--text-muted);
+}
+
+.badge-pending {
+    background-color: var(--warning-bg);
+    color: var(--warning-text);
+}
+
+.badge-approved {
+    background-color: var(--success-bg);
+    color: var(--success-text);
+}
+
+.badge-rejected {
+    background-color: var(--error-bg);
+    color: var(--error-text);
+}
+
+/* ── FORMS ───────────────────────────────────── */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-main);
+    margin-bottom: 0.4rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.875rem;
+    color: var(--text-main);
+    background-color: white;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--brew-accent);
+    box-shadow: 0 0 0 3px rgba(201,124,93,0.15);
+}
+
+.form-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* ── ALERTS / FLASH MESSAGES ─────────────────── */
+.alert {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
+    border-left: 4px solid transparent;
+}
+
+.alert-success {
+    background-color: var(--success-bg);
+    color: var(--success-text);
+    border-left-color: #10b981;
+}
+
+.alert-error {
+    background-color: var(--error-bg);
+    color: var(--error-text);
+    border-left-color: #ef4444;
+}
+
+.alert-warning {
+    background-color: var(--warning-bg);
+    color: var(--warning-text);
+    border-left-color: #f59e0b;
+}
+
+/* ── LOGOUT BUTTON ───────────────────────────── */
+.logout-btn {
+    background-color: white;
+    color: var(--brew-dark);
+    border: none;
+    padding: 0.35rem 0.85rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.logout-btn:hover {
+    background-color: #f3e8e8;
+}
