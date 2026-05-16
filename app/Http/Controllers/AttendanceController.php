@@ -146,53 +146,43 @@ class AttendanceController extends Controller
 
     // ── EMPLOYEE: Time Out ───────────────────────────────────
     public function timeOut()
-    {
-        $employee = auth()->user()->employee;
-        $today    = Carbon::today()->toDateString();
-        $now      = Carbon::now();
+{
+    $employee = auth()->user()->employee;
+    $today    = Carbon::today()->toDateString();
+    $now      = Carbon::now();
 
-        $record = Attendance::where('employee_id', $employee->id)
-            ->where('date', $today)
-            ->first();
-
-        if (!$record) {
-            return redirect()->route('attendance.show')
-                ->with('error', 'You have not timed in yet.');
-        }
-
-        if ($record->time_out) {
-            return redirect()->route('attendance.show')
-                ->with('error', 'You have already timed out today.');
-        }
-
-       // ── Enforce 4:00 PM fixed time out (with 3:30 PM grace) ──
-$allowedTimeOut = Carbon::today()->setTime(15, 30, 0);
-
-        if ($now->lessThan($allowedTimeOut)) {
-            $minutesLeft = $now->diffInMinutes($allowedTimeOut);
-            $hoursLeft   = floor($minutesLeft / 60);
-            $minsLeft    = $minutesLeft % 60;
-
-            $message = $hoursLeft > 0
-                ? "Time out is only available from 3:30 PM onwards. {$hoursLeft}h {$minsLeft}m remaining."
-                : "Time out is only available from 3:30 PM onwards. {$minsLeft} minutes remaining.";
-
-            return redirect()->route('attendance.show')
-                ->with('error', $message);
-        }
-
-        // ── Compute hours worked ──────────────────────────────
-        $hoursWorked = round($minutesWorked / 60, 2);
-
-        $record->update([
-            'time_out'     => $now->toTimeString(),
-            'hours_worked' => $hoursWorked,
-        ]);
-
+    // Block before 3:30 PM
+    if ($now->lt(Carbon::today()->setTime(15, 30))) {
         return redirect()->route('attendance.show')
-            ->with('success', 'Time out recorded at ' . $now->format('h:i A') . '! Hours worked: ' . $hoursWorked . 'h');
+            ->with('error', 'Time out is only available from 3:30 PM.');
     }
 
+    $record = Attendance::where('employee_id', $employee->id)
+        ->where('date', $today)
+        ->first();
+
+    if (!$record) {
+        return redirect()->route('attendance.show')
+            ->with('error', 'You have not timed in yet.');
+    }
+
+    if ($record->time_out) {
+        return redirect()->route('attendance.show')
+            ->with('error', 'You have already timed out today.');
+    }
+
+    // ── CORRECT computation ──────────────────────────────────
+    $timeIn      = Carbon::parse($record->time_in);
+    $hoursWorked = round($timeIn->diffInMinutes($now) / 60, 2);
+
+    $record->update([
+        'time_out'     => $now->toTimeString(),
+        'hours_worked' => $hoursWorked,
+    ]);
+
+    return redirect()->route('attendance.show')
+        ->with('success', 'Time out recorded! Hours worked: ' . $hoursWorked . 'h');
+}
     // ── EMPLOYEE: Toggle Overtime Flag ───────────────────────
     public function toggleOvertime()
     {
