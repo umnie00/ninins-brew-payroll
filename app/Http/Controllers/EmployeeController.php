@@ -23,7 +23,7 @@ class EmployeeController extends Controller
         });
     }
 
-    // Department filter
+    // Department filte
     if ($request->filled('department')) {
         $query->where('department', $request->department);
     }
